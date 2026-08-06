@@ -20,6 +20,13 @@ class GroceryViewModel : ViewModel() {
 
     private var nextId by mutableIntStateOf(1)
 
+    init {
+        // TEMP: dummy data for visual testing — remove before submission
+        updateBudget(1000.0)
+        addItem(name = "Rice", price = 45.0, quantity = 2)
+        addItem(name = "Eggs", price = 8.5, quantity = 12)
+        addItem(name = "Milk", price = 65.0, quantity = 1)
+    }
     fun updateBudget(newBudget: Double) {
         if (newBudget >= 0) {
             budget = newBudget

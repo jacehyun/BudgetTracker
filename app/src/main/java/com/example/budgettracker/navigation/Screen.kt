@@ -4,5 +4,4 @@ package com.example.budgettracker.navigation
 sealed class Screen(val route: String) {
     data object Home: Screen("home")
     data object GroceryList: Screen("grocery_list")
-    data object Stats: Screen("stats")
 }

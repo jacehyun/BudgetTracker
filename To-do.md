@@ -12,21 +12,21 @@
 
 
 ## **Sprint 2 - Home Screen**
-1. [ ] Replace placeholder with Scaffold
-2. [ ] Add Top App Bar
-3. [ ] Add Budget TextField
-4. [ ] Add Item Name TextField
-5. [ ] Add Price TextField
-6. [ ] Add Quantity TextField
-7. [ ] Add Add Item Button
-8. [ ] Connect Button to ViewModel
-9. [ ] Clear TextFields after adding
-10. [ ] Add Summary Card
-11. [ ] Display Total Spent
-12. [ ] Display Remaining Budget
-13. [ ] Display Total Grocery Items
-14. [ ] Add Budget Progress Bar
-15. [ ] Test Home Screen
+1. [/] Replace placeholder with Scaffold
+2. [/] Add Top App Bar
+3. [/] Add Budget TextField
+4. [/] Add Item Name TextField
+5. [/] Add Price TextField
+6. [/] Add Quantity TextField
+7. [/] Add Add Item Button
+8. [/] Connect Button to ViewModel
+9. [/] Clear TextFields after adding
+10. [/] Add Summary Card
+11. [/] Display Total Spent
+12. [/] Display Remaining Budget
+13. [/] Display Total Grocery Items
+14. [/] Add Budget Progress Bar
+15. [/] Test Home Screen
 
 ## **Sprint 3 - Grocery List & Statistics**
 
