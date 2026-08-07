@@ -13,36 +13,60 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.unit.dp
 import com.example.budgettracker.ui.components.GroceryCard
 import com.example.budgettracker.viewmodel.GroceryViewModel
-
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.Alignment
+import androidx.compose.foundation.layout.Box
 @Composable
 fun GroceryListScreen (
     viewModel: GroceryViewModel
 ) {
-    Scaffold { innerPadding ->
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "No. of items: ${viewModel.totalItems}",
+            style = MaterialTheme.typography.titleMedium,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.End,
+            modifier = Modifier.fillMaxWidth().padding(end = 12.dp)
+        )
+
+        Spacer(modifier = Modifier.height(12.dp))
+
         if (viewModel.groceryList.isEmpty()) {
-            Text (
-                text = "No Items Added Yet!",
-                modifier = Modifier.padding(innerPadding)
-            )
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(text = "No Items Added Yet!")
+            }
         } else {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(innerPadding)
-                    .padding(16.dp),
+                    .padding(12.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                items (
+                items(
                     items = viewModel.groceryList,
                     key = { it.id }
                 ) { item ->
                     GroceryCard(
                         item = item,
-                        onDelete = { viewModel.deleteItem(item.id)}
+                        onDelete = { viewModel.deleteItem(item.id) }
                     )
                 }
             }
         }
     }
-
 }

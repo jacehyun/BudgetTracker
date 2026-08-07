@@ -30,23 +30,23 @@
 
 ## **Sprint 3 - Grocery List & Statistics**
 
-1. [ ] Add Bottom Navigation
-2. [ ] Connect Home screen navigation
-3. [ ] Connect Grocery List navigation
-4. [ ] Connect Statistics navigation
+1. [/] Add Bottom Navigation
+2. [/] Connect Home screen navigation
+3. [/] Connect Grocery List navigation
+4. [/] Connect Statistics navigation
 
 ──────── Grocery List ────────
 
-1. [ ] Create LazyColumn
-2. [ ] Display Grocery Cards
-3. [ ] Show Item Name
-4. [ ] Show Price
-5. [ ] Show Quantity
-6. [ ] Show Total Price
-7. [ ] Add Delete Button
-8. [ ] Connect Delete Button to ViewModel
-9. [ ] Show Empty State if list is empty
-10. [ ] Test automatic UI updates
+1. [/] Create LazyColumn
+2. [/] Display Grocery Cards
+3. [/] Show Item Name
+4. [/] Show Price
+5. [/] Show Quantity
+6. [/] Show Total Price
+7. [/] Add Delete Button
+8. [/] Connect Delete Button to ViewModel
+9. [/] Show Empty State if list is empty
+10. [/] Test automatic UI updates
 
 ──────── Statistics ────────
 

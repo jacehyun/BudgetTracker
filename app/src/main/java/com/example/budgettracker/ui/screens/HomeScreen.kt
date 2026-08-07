@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -35,7 +36,17 @@ import com.example.budgettracker.viewmodel.GroceryViewModel
 import com.example.budgettracker.ui.components.SetBudgetDialog
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.ui.Alignment
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Edit
+import androidx.compose.material.icons.outlined.ShoppingBasket
+import androidx.compose.material3.Icon
+import androidx.compose.material.icons.outlined.Numbers
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.filled.Add
 
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -58,41 +69,17 @@ fun HomeScreen (
         mutableStateOf("")
 
     }
-
-    var showSetBudgetDialog by rememberSaveable {
-        mutableStateOf(false)
-    }
-    Scaffold(
-        modifier = Modifier.fillMaxSize(),
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text("Grocery Budget Tracker")
-                }
-            )
-        }
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier.padding(innerPadding).padding(16.dp)
+    Column(
+            modifier = Modifier.fillMaxSize().padding(16.dp)
+                .verticalScroll(rememberScrollState()) // let content scrolled up
+                .imePadding() // push content above keyboard
         ) {
             SummaryCard(
                 budget = viewModel.budget,
                 spent = viewModel.totalSpent,
-                remaining = viewModel.remainingBudget
+                remaining = viewModel.remainingBudget,
+                onUpdateBudget = {viewModel.updateBudget(it)}
             )
-            Spacer (
-                modifier = Modifier.height(24.dp)
-            )
-            OutlinedButton(
-                onClick = {
-                    showSetBudgetDialog = true
-                },
-                shape = RoundedCornerShape(8.dp),
-                modifier = Modifier.size(150.dp,50.dp)
-                    .align(Alignment.End)
-            ) {
-                Text("Edit Budget")
-            }
             Spacer (
                 modifier = Modifier.height(24.dp)
             )
@@ -118,6 +105,12 @@ fun HomeScreen (
                         label = {
                             Text("Item Name")
                         },
+                        leadingIcon = {
+                            Icon (
+                                imageVector = Icons.Outlined.ShoppingBasket,
+                                contentDescription = "Shopping Icon"
+                            )
+                        },
                         modifier = Modifier.fillMaxWidth()
                     )
                     Spacer(
@@ -135,8 +128,11 @@ fun HomeScreen (
                             label = {
                                 Text("Price")
                             },
+                            leadingIcon = {
+                              Text ( text = "₱", style = MaterialTheme.typography.titleLarge)
+                            },
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
-                            modifier = Modifier.weight(2f)
+                            modifier = Modifier.weight(1f)
                         )
                         OutlinedTextField(
                             value = quantityInput,
@@ -145,6 +141,12 @@ fun HomeScreen (
                             },
                             label = {
                                 Text("Quantity")
+                            },
+                            leadingIcon = {
+                                Icon (
+                                    imageVector = Icons.Outlined.Numbers,
+                                    contentDescription = "Quantity"
+                                )
                             },
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                             modifier = Modifier.weight(1f)
@@ -179,13 +181,3 @@ fun HomeScreen (
             }
         }
     }
-    if (showSetBudgetDialog) {
-        SetBudgetDialog(
-            onDismiss = { showSetBudgetDialog = false },
-            onConfirm = { budget ->
-                viewModel.updateBudget(budget)
-                showSetBudgetDialog = false
-            }
-        )
-    }
-}

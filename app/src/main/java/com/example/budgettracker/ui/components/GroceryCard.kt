@@ -18,8 +18,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.example.budgettracker.model.GroceryItem
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.budgettracker.model.GroceryItem
 import com.example.budgettracker.util.formatCurrency
 
 @Composable
@@ -27,55 +27,51 @@ fun GroceryCard(
     item: GroceryItem,
     onDelete: () -> Unit
 ) {
-    Card (
+    Card(
         modifier = Modifier.fillMaxWidth(),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 4.dp
         )
     ) {
-        Row (
+        Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+                .padding(16.dp)
         ) {
-            Row (
-                modifier = Modifier.weight(1f),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ){
-                Text (
-                    text = "${item.name} × ${item.quantity}",
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = item.name,
                     style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.weight(1f)
                 )
-                Text (
-                    text = (formatCurrency(item.totalPrice)),
+                IconButton(onClick = onDelete) {
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = "Delete Item"
+                    )
+                }
+            }
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Unit Price: ${formatCurrency(item.price)} × ${item.quantity}",
                     style = MaterialTheme.typography.bodyMedium
                 )
-            }
-            IconButton(
-                onClick = onDelete
-            ) {
-                Icon (
-                    imageVector = Icons.Default.Delete,
-                    contentDescription = "Delete Item"
+                Text(
+                    text = formatCurrency(item.totalPrice),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold
                 )
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GroceryCardPreview() {
-    GroceryCard(
-        item = GroceryItem(
-            id = 1,
-            name = "Rice",
-            price = 50.0,
-            quantity = 2
-        ),
-        onDelete = {}
-    )
 }
